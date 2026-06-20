@@ -68,6 +68,13 @@
             color: var(--gold);
             text-decoration: none;
             letter-spacing: 2px;
+            z-index: 1001; /* Queda sobre el menú móvil */
+        }
+
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
         }
 
         .nav-links {
@@ -89,29 +96,22 @@
             color: var(--gold);
         }
 
-        .language-selector {
-            display: flex;
-            gap: 10px;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
         }
 
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
 
-        .lang-btn:hover, .lang-btn.active {
-            background: var(--gold);
-            color: var(--bg);
-        }
-
+        /* Clases de idioma */
         html[lang="es"] .en-text { display: none !important; }
         html[lang="en"] .es-text { display: none !important; }
 
@@ -181,12 +181,55 @@
             50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
         }
 
+        /* --- BOTÓN HAMBURGUESA --- */
+        .menu-toggle {
+            display: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* --- ADAPTACIÓN PARA MÓVILES --- */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; 
+            .menu-toggle {
+                display: block;
+                margin-left: 15px;
             }
+
+            .nav-center {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(8, 8, 8, 0.98);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+
+            .nav-center.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 20px;
+            }
+
             .hero h1 {
                 letter-spacing: 2px;
+            }
+
+            .whatsapp-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 25px;
             }
         }
     </style>
@@ -198,7 +241,8 @@
         <div class="nav-left">
             <a href="index.html" class="nav-logo">STEVE QUESADA</a>
         </div>
-        <div class="nav-center">
+        
+        <div class="nav-center" id="mobile-menu-container">
             <div class="nav-links">
                 <a href="index.html" class="nav-link">
                     <span class="es-text">INICIO</span>
@@ -214,8 +258,14 @@
                 </a>
             </div>
         </div>
-        <div class="nav-right">
+        
+        <div class="nav-right" style="display: flex; align-items: center;">
+            <div id="i18n-container"></div>
+            
+            <div class="menu-toggle" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
             </div>
+        </div>
     </div>
 </nav>
 
@@ -227,6 +277,24 @@
 <a href="https://wa.me/50688888888?text=Hola%20Steve!%20Quiero%20información%20sobre%20la%20tienda" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
+
+<script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menuContainer = document.getElementById('mobile-menu-container');
+    const menuIcon = menuBtn.querySelector('i');
+
+    menuBtn.addEventListener('click', () => {
+        menuContainer.classList.toggle('active');
+        
+        if (menuContainer.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+    });
+</script>
 
 <script src="i18n.js"></script>
 
