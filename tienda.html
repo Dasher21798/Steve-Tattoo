@@ -89,7 +89,6 @@
             color: var(--gold);
         }
 
-        /* Estilos para el selector de idiomas */
         .language-selector {
             display: flex;
             gap: 10px;
@@ -113,7 +112,6 @@
             color: var(--bg);
         }
 
-        /* Clases para ocultar textos según el idioma seleccionado */
         html[lang="es"] .en-text { display: none !important; }
         html[lang="en"] .es-text { display: none !important; }
 
@@ -217,11 +215,7 @@
             </div>
         </div>
         <div class="nav-right">
-            <div class="language-selector">
-                <button class="lang-btn active" onclick="cambiarIdioma('es', this)">ES</button>
-                <button class="lang-btn" onclick="cambiarIdioma('en', this)">EN</button>
             </div>
-        </div>
     </div>
 </nav>
 
@@ -233,20 +227,6 @@
 <a href="https://wa.me/50688888888?text=Hola%20Steve!%20Quiero%20información%20sobre%20la%20tienda" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
-
-<script>
-    function cambiarIdioma(idioma, elementoBtn) {
-        // Cambiar el atributo lang en el documento HTML
-        document.documentElement.lang = idioma;
-        
-        // Quitar la clase active de todos los botones
-        const botones = document.querySelectorAll('.lang-btn');
-        botones.forEach(btn => btn.classList.remove('active'));
-        
-        // Agregar la clase active al botón clickeado
-        elementoBtn.classList.add('active');
-    }
-</script>
 
 <script src="i18n.js"></script>
 
