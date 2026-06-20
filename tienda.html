@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Steve Quesada Tattoo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #bc1a1a;
+            --gold: #d4af37;
+            --bg: #080808;
+            --text: #ffffff;
+            --glass: rgba(15, 15, 15, 0.85);
+            --gradient: linear-gradient(135deg, #bc1a1a, #d4af37);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+            animation: bgShift 20s ease-in-out infinite alternate;
+
+            background-image:
+                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
+                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
+                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png');
+            background-attachment: fixed;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .nav-left {
+            flex: 0 0 auto;
+        }
+
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-right {
+            flex: 0 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 70px;
+            background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-item {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .product-item:nth-child(1) { animation-delay: 0.2s; }
+        .product-item:nth-child(2) { animation-delay: 0.4s; }
+        .product-item:nth-child(3) { animation-delay: 0.6s; }
+        .product-item:nth-child(4) { animation-delay: 0.8s; }
+        .product-item:nth-child(5) { animation-delay: 1.0s; }
+        .product-item:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(188, 26, 26, 0.2);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-item:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-family: 'Syncopate', sans-serif;
+            color: var(--gold);
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-family: 'Syncopate', sans-serif;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .product-description {
+            margin: 10px 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .buy-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 26, 26, 0.3);
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--gradient);
+            color: white;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 4px 4px 0px var(--gold);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translate(-4px, -4px) scale(1.1);
+            box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); }
+            50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">INICIO</a>
+                <a href="infografia.html" class="nav-link">INFOGRAFÍA</a>
+                <a href="premios.html" class="nav-link">PREMIOS</a>
+                <a href="convenciones.html" class="nav-link">CONVENCIONES</a>
+                <a href="tienda.html" class="nav-link active">TIENDA</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <!-- Language selector will be added here by JavaScript -->
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>TIENDA</h1>
+</section>
+
+<div class="container">
+        <p class="store-subtitle" style="text-align: center; opacity: 0.8; margin-bottom: 50px; font-size: 1.1rem;">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Camiseta+Steve" alt="Camiseta Steve Quesada" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+1'">
+            </div>
+            <div class="product-info">
+                <h3>Camiseta Steve Quesada</h3>
+                <div class="product-price">$35.000</div>
+                <p class="product-description">Camiseta negra con diseño exclusivo de Steve Quesada. Algodón premium, corte clásico.</p>
+                <button class="buy-btn" onclick="contactarProducto('Camiseta Steve Quesada')">COMPRAR</button>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Taza+Tattoo" alt="Taza Tattoo Art" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+2'">
+            </div>
+            <div class="product-info">
+                <h3>Taza Tattoo Art</h3>
+                <div class="product-price">$15.000</div>
+                <p class="product-description">Taza de cerámica con diseños de tatuajes tradicionales. Perfecta para tu café diario.</p>
+                <button class="buy-btn" onclick="contactarProducto('Taza Tattoo Art')">COMPRAR</button>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Libro+Técnicas" alt="Libro Técnicas de Tatuaje" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+3'">
+            </div>
+            <div class="product-info">
+                <h3>Libro Técnicas de Tatuaje</h3>
+                <div class="product-price">$50.000</div>
+                <p class="product-description">Guía ilustrada con técnicas tradicionales de tatuaje oriental. Edición limitada.</p>
+                <button class="buy-btn" onclick="contactarProducto('Libro Técnicas de Tatuaje')">COMPRAR</button>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Stickers+Pack" alt="Pack de Stickers" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+4'">
+            </div>
+            <div class="product-info">
+                <h3>Pack de Stickers</h3>
+                <div class="product-price">$8.000</div>
+                <p class="product-description">Set de 10 stickers con diseños únicos de Steve Quesada. Alta calidad, resistentes al agua.</p>
+                <button class="buy-btn" onclick="contactarProducto('Pack de Stickers')">COMPRAR</button>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Gorra+Oriental" alt="Gorra Oriental" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+5'">
+            </div>
+            <div class="product-info">
+                <h3>Gorra Oriental</h3>
+                <div class="product-price">$25.000</div>
+                <p class="product-description">Gorra negra con bordado de símbolos orientales tradicionales. Ajustable y cómoda.</p>
+                <button class="buy-btn" onclick="contactarProducto('Gorra Oriental')">COMPRAR</button>
+            </div>
+        </div>
+
+        <div class="product-item"> 
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x250/333/666?text=Mouse+Pad" alt="Mouse Pad Personalizado" onerror="this.src='https://via.placeholder.com/300x250/333/666?text=Producto+6'">
+            </div>
+            <div class="product-info">
+                <h3>Mouse Pad Personalizado</h3>
+                <div class="product-price">$18.000</div>
+                <p class="product-description">Mouse pad de alta calidad con diseño exclusivo de Steve Quesada. Superficie óptima para gaming.</p>
+                <button class="buy-btn" onclick="contactarProducto('Mouse Pad Personalizado')">COMPRAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="https://wa.me/50688888888?text=Hola%20Steve!%20Vi%20tu%20tienda%20y%20quiero%20comprar%20un%20producto" class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+function contactarProducto(producto) {
+    const mensaje = `Hola Steve! Vi tu tienda y quiero comprar: ${producto}`;
+    const url = `https://wa.me/50688888888?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+</script>
+
+<script src="i18n.js"></script>
+
+</body>
+</html>

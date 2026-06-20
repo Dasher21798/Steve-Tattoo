@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Quesada Tattoo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #bc1a1a; 
+            --gold: #d4af37;
+            --bg: #080808;
+            --text: #ffffff;
+            --glass: rgba(15, 15, 15, 0.85);
+            --gradient: linear-gradient(135deg, #bc1a1a, #d4af37);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+            animation: bgShift 20s ease-in-out infinite alternate;
+            
+            background-image: 
+                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
+                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
+                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png'); 
+            background-attachment: fixed;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .nav-left {
+            flex: 0 0 auto;
+        }
+
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-right {
+            flex: 0 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        header {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 2px solid var(--accent);
+            background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%);
+            overflow: hidden;
+            margin-top: 70px; /* Account for fixed nav */
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.05) 50%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .kanji-bg {
+            position: absolute;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(10rem, 25vw, 20rem);
+            color: rgba(188, 26, 26, 0.05);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-50%, -52%) rotate(1deg); }
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            to { text-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 40px rgba(188, 26, 26, 0.2); }
+        }
+
+        header p {
+            font-family: 'Noto Serif JP', serif;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-top: 15px;
+            font-weight: bold;
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 50px;
+            color: var(--gold);
+            font-size: 1.2rem;
+            border-left: 4px solid var(--accent);
+            display: inline-block;
+            padding-left: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            animation: slideIn 1.5s ease-out 2s forwards;
+        }
+
+        @keyframes slideIn {
+            to { left: 0; }
+        }
+
+        
+        .portfolio-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .work-item {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            aspect-ratio: 1 / 1;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            transform: translateY(0);
+            opacity: 0;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .work-item:nth-child(1) { animation-delay: 2.5s; }
+        .work-item:nth-child(2) { animation-delay: 2.7s; }
+        .work-item:nth-child(3) { animation-delay: 2.9s; }
+        .work-item:nth-child(4) { animation-delay: 3.1s; }
+        .work-item:nth-child(5) { animation-delay: 3.3s; }
+        .work-item:nth-child(6) { animation-delay: 3.5s; }
+        .work-item:nth-child(7) { animation-delay: 3.7s; }
+        .work-item:nth-child(8) { animation-delay: 3.9s; }
+        .work-item:nth-child(9) { animation-delay: 4.1s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .work-item::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            z-index: 1;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .work-item::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            z-index: 2;
+            transition: left 0.5s ease;
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .work-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(188, 26, 26, 0.3), 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-15px) rotate(1deg);
+        }
+
+        .work-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .work-item:hover::after {
+            left: 100%;
+        }
+
+        .work-item:hover img {
+            transform: scale(1.15);
+        }
+
+        
+        .booking-section {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent);
+            margin: 80px 0;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
+            
+            filter: invert(93%) hue-rotate(180deg) contrast(90%);
+            margin-top: 30px;
+            border-radius: 4px;
+            transition: filter 0.3s ease;
+        }
+
+        iframe:hover {
+            filter: invert(93%) hue-rotate(180deg) contrast(95%) brightness(1.05);
+        }
+
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient);
+            transition: left 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--gradient);
+            color: white;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 4px 4px 0px var(--gold);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translate(-4px, -4px) scale(1.1);
+            box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); }
+            50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { letter-spacing: 6px; }
+            .booking-section { padding: 15px; }
+            iframe { height: 450px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">INICIO</a>
+                <a href="infografia.html" class="nav-link">INFOGRAFÍA</a>
+                <a href="premios.html" class="nav-link">PREMIOS</a>
+                <a href="convenciones.html" class="nav-link">CONVENCIONES</a>
+                <a href="tienda.html" class="nav-link">TIENDA</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <!-- Language selector will be added here by JavaScript -->
+        </div>
+    </div>
+</nav>
+
+<header>
+    <div class="kanji-bg">和彫</div> <h1>Steve Quesada</h1>
+    <p>Especialista en tatuajes orientales</p>
+</header>
+
+<div class="container">
+    <section>
+        <h2>TRABAJOS REALIZADOS</h2>
+        <div class="portfolio-preview">
+            <div class="work-item"><img src="image1.jpeg" alt="Tatuaje 1"></div>
+            <div class="work-item"><img src="image2.jpeg" alt="Tatuaje 2"></div>
+            <div class="work-item"><img src="image3.jpeg" alt="Tatuaje 3"></div>
+            <div class="work-item"><img src="image4.jpeg" alt="Tatuaje 4"></div>
+            <div class="work-item"><img src="image5.jpeg" alt="Tatuaje 5"></div>
+            <div class="work-item"><img src="image6.jpeg" alt="Tatuaje 6"></div>
+            <div class="work-item"><img src="image7.jpeg" alt="Tatuaje 7"></div>
+            <div class="work-item"><img src="image8.jpeg" alt="Tatuaje 8"></div>
+            <div class="work-item"><img src="image9.jpeg" alt="Tatuaje 9"></div>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <h2 style="border:none; text-align:center; display:block;">RESERVA TU ESPACIO</h2>
+        <p style="text-align:center; opacity:0.8; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px;">
+            Selecciona una fecha disponible y reserva tu cita
+        </p>
+
+        <!-- Configuración del Calendario Personal -->
+        <!-- EJEMPLO DE URL CONFIGURADA:
+             https://calendar.google.com/calendar/embed?src=steve.quesada.tattoo@gmail.com&ctz=America%2FCosta_Rica&mode=WEEK&showCalendars=0&showTz=1&wkst=1&bgcolor=%23080808&color=%23d4af37
+        -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=asantanamata21%40gmail.com&ctz=America%2FMexico_City"
+                style="border: 0"
+                width="100%"
+                height="650px"
+                frameborder="0"
+                scrolling="no">
+        </iframe>
+    </section>
+
+    <section style="text-align: center;">
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/1GExeMFNzJ/" class="social-link" target="_blank">FACEBOOK</a>
+            <a href="https://www.instagram.com/steve.quesada.ttt" class="social-link" target="_blank">INSTAGRAM</a>
+        </div>
+    </section>
+</div>
+
+<a href="https://wa.me/50688888888?text=Hola%20Steve!%20Vi%20tu%20web%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="calendar.js"></script>
+<script src="i18n.js"></script>
+
+</body>
+</html>

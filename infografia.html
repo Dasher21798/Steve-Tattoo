@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía - Steve Quesada Tattoo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #bc1a1a;
+            --gold: #d4af37;
+            --bg: #080808;
+            --text: #ffffff;
+            --glass: rgba(15, 15, 15, 0.85);
+            --gradient: linear-gradient(135deg, #bc1a1a, #d4af37);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+            animation: bgShift 20s ease-in-out infinite alternate;
+
+            background-image:
+                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
+                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
+                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png');
+            background-attachment: fixed;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .nav-left {
+            flex: 0 0 auto;
+        }
+
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-right {
+            flex: 0 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 70px;
+            background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .steve-story {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(188, 26, 26, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .story-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .story-image img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .story-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text h2 {
+            font-family: 'Syncopate', sans-serif;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .story-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .infografia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .infografia-item {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .infografia-item:nth-child(1) { animation-delay: 0.2s; }
+        .infografia-item:nth-child(2) { animation-delay: 0.4s; }
+        .infografia-item:nth-child(3) { animation-delay: 0.6s; }
+        .infografia-item:nth-child(4) { animation-delay: 0.8s; }
+        .infografia-item:nth-child(5) { animation-delay: 1.0s; }
+        .infografia-item:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .infografia-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(188, 26, 26, 0.2);
+            border-color: var(--accent);
+        }
+
+        .infografia-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .infografia-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .infografia-content {
+            padding: 20px;
+        }
+
+        .infografia-content h3 {
+            font-family: 'Syncopate', sans-serif;
+            color: var(--gold);
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .infografia-content p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--gradient);
+            color: white;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 4px 4px 0px var(--gold);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translate(-4px, -4px) scale(1.1);
+            box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); }
+            50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .infografia-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            .story-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .story-text h2 {
+                font-size: 1.5rem;
+            }
+            .story-image {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">INICIO</a>
+                <a href="infografia.html" class="nav-link active">INFOGRAFÍA</a>
+                <a href="premios.html" class="nav-link">PREMIOS</a>
+                <a href="convenciones.html" class="nav-link">CONVENCIONES</a>
+                <a href="tienda.html" class="nav-link">TIENDA</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <!-- Language selector will be added here by JavaScript -->
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>INFOGRAFÍA</h1>
+</section>
+
+<section class="steve-story">
+    <div class="container">
+        <div class="story-content">
+            <div class="story-image">
+                <img src="image10.jpeg" alt="Steve Quesada - Imagen principal infografía" onerror="this.src='https://via.placeholder.com/400x500/333/666?text=Image+10'">
+            </div>
+            <div class="story-text">
+                <h2>La Historia de Steve en el Tatuaje</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="https://wa.me/50688888888?text=Hola%20Steve!%20Vi%20tu%20infografía%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="i18n.js"></script>
+
+</body>
+</html>
