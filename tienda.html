@@ -89,6 +89,34 @@
             color: var(--gold);
         }
 
+        /* Estilos para el selector de idiomas */
+        .language-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* Clases para ocultar textos según el idioma seleccionado */
+        html[lang="es"] .en-text { display: none !important; }
+        html[lang="en"] .es-text { display: none !important; }
+
         .hero {
             flex: 1;
             display: flex;
@@ -116,17 +144,6 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease-out forwards;
-        }
-
-        .hero h2 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(1rem, 2.5vw, 2rem);
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out 0.3s forwards;
         }
 
         @keyframes fadeInUp {
@@ -168,7 +185,7 @@
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Simplificado para móviles en esta vista de "próximamente" */
+                display: none; 
             }
             .hero h1 {
                 letter-spacing: 2px;
@@ -185,24 +202,51 @@
         </div>
         <div class="nav-center">
             <div class="nav-links">
-                <a href="index.html" class="nav-link">INICIO</a>
-                <a href="infografia.html" class="nav-link">INFOGRAFÍA</a>
-                <a href="tienda.html" class="nav-link active">TIENDA</a>
+                <a href="index.html" class="nav-link">
+                    <span class="es-text">INICIO</span>
+                    <span class="en-text">HOME</span>
+                </a>
+                <a href="infografia.html" class="nav-link">
+                    <span class="es-text">INFOGRAFÍA</span>
+                    <span class="en-text">INFOGRAPHIC</span>
+                </a>
+                <a href="tienda.html" class="nav-link active">
+                    <span class="es-text">TIENDA</span>
+                    <span class="en-text">STORE</span>
+                </a>
             </div>
         </div>
         <div class="nav-right">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="cambiarIdioma('es', this)">ES</button>
+                <button class="lang-btn" onclick="cambiarIdioma('en', this)">EN</button>
             </div>
+        </div>
     </div>
 </nav>
 
 <section class="hero">
-    <h1 data-i18n="soon-es">PRONTO VISITA NUESTRA TIENDA</h1>
-    <h2 data-i18n="soon-en">VISIT OUR STORE SOON</h2>
+    <h1 class="es-text">PRONTO VISITA NUESTRA TIENDA</h1>
+    <h1 class="en-text">VISIT OUR STORE SOON</h1>
 </section>
 
 <a href="https://wa.me/50688888888?text=Hola%20Steve!%20Quiero%20información%20sobre%20la%20tienda" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
+
+<script>
+    function cambiarIdioma(idioma, elementoBtn) {
+        // Cambiar el atributo lang en el documento HTML
+        document.documentElement.lang = idioma;
+        
+        // Quitar la clase active de todos los botones
+        const botones = document.querySelectorAll('.lang-btn');
+        botones.forEach(btn => btn.classList.remove('active'));
+        
+        // Agregar la clase active al botón clickeado
+        elementoBtn.classList.add('active');
+    }
+</script>
 
 <script src="i18n.js"></script>
 
