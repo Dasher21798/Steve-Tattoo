@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steve Quesada Tattoo</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
-
     <style>
         :root {
-            --accent: #bc1a1a; 
+            --accent: #bc1a1a;
             --gold: #d4af37;
             --bg: #080808;
             --text: #ffffff;
@@ -31,11 +29,9 @@
             margin: 0;
             overflow-x: hidden;
             animation: bgShift 20s ease-in-out infinite alternate;
-            
-            background-image: 
-                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
-                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
-                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png'); 
+            background-image: linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
+                              url('https://www.transparenttextures.com/patterns/shattered-island.png'),
+                              url('https://www.transparenttextures.com/patterns/japanese-sayagata.png');
             background-attachment: fixed;
         }
 
@@ -70,7 +66,7 @@
             color: var(--gold);
             text-decoration: none;
             letter-spacing: 2px;
-            z-index: 1001; 
+            z-index: 1001;
         }
 
         .nav-center {
@@ -144,7 +140,7 @@
             0%, 100% { transform: translateX(-100%); }
             50% { transform: translateX(100%); }
         }
-        
+
         .kanji-bg {
             position: absolute;
             font-family: 'Ma Shan Zheng', cursive;
@@ -281,7 +277,10 @@
         .work-item::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             z-index: 1;
             opacity: 0.6;
@@ -291,7 +290,10 @@
         .work-item::after {
             content: "";
             position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
             z-index: 2;
             transition: left 0.5s ease;
@@ -449,7 +451,6 @@
 
             h1 { letter-spacing: 6px; }
             .booking-section { padding: 15px; }
-
             .whatsapp-btn {
                 bottom: 20px;
                 right: 20px;
@@ -460,271 +461,229 @@
         }
 
         /* ==========================================================================
-           --- CALENDARIO ESTILO GRILLA COMPLETA Y GRANDE (FORZADO MEDIANTE CSS) ---
+           --- FULLCALENDAR ESTILOS PERSONALIZADOS (DARK/GOLD THEME) ---
            ========================================================================== */
-        
-        /* 1. Contenedor principal del calendario inline: se estira al ancho máximo disponible */
-        .flatpickr-calendar.inline {
-            width: 100% !important;
-            max-width: 850px !important;
-            margin: 0 auto !important;
+        .fc {
             background: rgba(12, 12, 12, 0.5) !important;
             border: 1px solid rgba(212, 175, 55, 0.2) !important;
             border-radius: 12px !important;
-            padding: 30px !important;
+            padding: 20px !important;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6) !important;
+            font-family: 'Noto Serif JP', serif;
         }
 
-        /* Forzar los contenedores internos nativos a usar el 100% del espacio */
-        .flatpickr-innerContainer, 
-        .flatpickr-rContainer, 
-        .flatpickr-days, 
-        .dayContainer {
-            width: 100% !important;
-            min-width: 100% !important;
-            max-width: 100% !important;
-        }
-
-        /* 2. Cabecera superior: Mes y Año */
-        .flatpickr-months {
-            height: 70px !important;
-        }
-        .flatpickr-current-month {
-            font-size: 1.6rem !important;
-            color: #ffffff !important;
-            padding: 10px 0 0 0 !important;
-        }
-        .flatpickr-monthDropdown-months {
+        /* Mes y cabecera */
+        .fc-toolbar-title {
             font-family: 'Syncopate', sans-serif !important;
-            font-weight: bold !important;
+            font-size: 1.4rem !important;
+            color: #ffffff !important;
             text-transform: uppercase;
-        }
-        .flatpickr-prev-month, .flatpickr-next-month {
-            padding: 15px !important;
-            color: var(--gold) !important;
-        }
-        .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg {
-            fill: var(--accent) !important;
+            letter-spacing: 2px;
         }
 
-        /* 3. Cabeceras de los días de la semana (Lun, Mar, Mié...) */
-        .flatpickr-weekdays {
-            height: 50px !important;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            margin-bottom: 10px;
-        }
-        span.flatpickr-weekday {
-            font-family: 'Syncopate', sans-serif !important;
-            font-size: 0.9rem !important;
-            font-weight: bold !important;
-            color: var(--gold) !important;
-            letter-spacing: 1px;
-        }
-
-        /* 4. Casillas de los números individuales (La cuadrícula) */
-        .flatpickr-day {
-            width: 14.28% !important; /* Divide equitativamente los 7 días de la semana */
-            max-width: 14.28% !important;
-            height: 85px !important; /* Altura generosa estilo calendario de escritorio */
-            line-height: 85px !important; /* Centrado vertical del número */
-            font-size: 1.3rem !important; 
-            border-radius: 6px !important;
-            margin: 5px 0 !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            color: #ffffff !important;
-            background: rgba(20, 20, 20, 0.4);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-        }
-
-        /* Días deshabilitados, pasados u ocupados */
-        .flatpickr-day.flatpickr-disabled, 
-        .flatpickr-day.flatpickr-disabled:hover,
-        .flatpickr-day.prevMonthDay, 
-        .flatpickr-day.nextMonthDay {
-            color: rgba(255, 255, 255, 0.12) !important;
-            background: rgba(5, 5, 5, 0.2) !important;
+        /* Botones de navegación */
+        .fc .fc-button-primary {
+            background-color: transparent !important;
             border-color: transparent !important;
-            text-decoration: line-through;
-            cursor: not-allowed;
+            color: var(--gold) !important;
+            font-size: 1.1rem !important;
+        }
+        .fc .fc-button-primary:hover {
+            color: var(--accent) !important;
+            background-color: rgba(212, 175, 55, 0.1) !important;
+        }
+        .fc .fc-button-primary:disabled {
+            opacity: 0.3 !important;
         }
 
-        /* Resaltado del día actual (Hoy) */
-        .flatpickr-day.today {
-            border-color: var(--accent) !important;
+        /* Días de la semana (Lun, Mar, Mie) */
+        .fc-col-header-cell-cushion {
+            font-family: 'Syncopate', sans-serif !important;
+            color: var(--gold) !important;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 10px 0 !important;
+            text-decoration: none !important;
+        }
+
+        /* Casillas de los días */
+        .fc-daygrid-day {
+            background: rgba(20, 20, 20, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+        .fc-daygrid-day-number {
+            color: #ffffff !important;
+            font-size: 1rem;
+            padding: 8px !important;
+            text-decoration: none !important;
+        }
+
+        /* Día actual */
+        .fc-day-today {
+            background: rgba(188, 26, 26, 0.15) !important;
+            border: 1px solid var(--accent) !important;
+        }
+        .fc-day-today .fc-daygrid-day-number {
             color: var(--accent) !important;
             font-weight: bold;
         }
 
-        /* Día seleccionado por el cliente */
-        .flatpickr-day.selected {
+        /* Bloques de eventos (Días ocupados) */
+        .fc-event {
             background: var(--gradient) !important;
-            border-color: var(--gold) !important;
+            border: none !important;
             color: #ffffff !important;
-            box-shadow: 0 0 15px rgba(188, 26, 26, 0.5) !important;
+            font-size: 0.75rem !important;
             font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            padding: 4px 6px;
+            margin: 2px 4px 0 4px !important;
+            box-shadow: 0 4px 10px rgba(188, 26, 26, 0.25);
+        }
+        .fc-event-title {
+            font-weight: bold !important;
         }
 
-        /* Efecto visual elegante al posarse sobre un día libre disponible */
-        .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):hover {
-            background: rgba(212, 175, 55, 0.15) !important;
-            border-color: var(--gold) !important;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Reducción proporcional inteligente en teléfonos móviles para evitar desbordes */
+        /* Adaptabilidad total para celulares */
         @media (max-width: 768px) {
-            .flatpickr-calendar.inline {
-                padding: 10px !important;
-            }
-            .flatpickr-day {
-                height: 48px !important;
-                line-height: 48px !important;
-                font-size: 1.1rem !important;
-                margin: 2px 0 !important;
-            }
-            .flatpickr-current-month {
-                font-size: 1.2rem !important;
-            }
-            span.flatpickr-weekday {
-                font-size: 0.75rem !important;
-            }
-            .flatpickr-months {
-                height: 50px !important;
-            }
+            .fc { padding: 10px !important; }
+            .fc-toolbar-title { font-size: 1rem !important; letter-spacing: 1px; }
+            .fc-daygrid-day-number { font-size: 0.85rem; padding: 4px !important; }
+            .fc-col-header-cell-cushion { font-size: 0.7rem; }
+            .fc-event { font-size: 0.65rem !important; padding: 2px 4px; margin: 1px 2px !important; }
+            .fc-scroller { height: auto !important; overflow: hidden !important; }
         }
     </style>
 </head>
 <body>
 
-<nav>
+    <nav>
+        <div class="container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">STEVE QUESADA</a>
+            </div>
+            <div class="nav-center" id="mobile-menu-container">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">
+                        <span class="es-text">INICIO</span>
+                        <span class="en-text">HOME</span>
+                    </a>
+                    <a href="infografia.html" class="nav-link">
+                        <span class="es-text">INFOGRAFÍA</span>
+                        <span class="en-text">INFOGRAPHIC</span>
+                    </a>
+                    <a href="tienda.html" class="nav-link">
+                        <span class="es-text">TIENDA</span>
+                        <span class="en-text">STORE</span>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-right" style="display: flex; align-items: center;">
+                <div id="i18n-container"></div>
+                <div class="menu-toggle" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="kanji-bg">和彫</div>
+        <h1>Steve Quesada</h1>
+        <p>Especialista en tatuajes orientales</p>
+    </header>
+
     <div class="container">
-        <div class="nav-left">
-            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
-        </div>
-        
-        <div class="nav-center" id="mobile-menu-container">
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">
-                    <span class="es-text">INICIO</span>
-                    <span class="en-text">HOME</span>
-                </a>
-                <a href="infografia.html" class="nav-link">
-                    <span class="es-text">INFOGRAFÍA</span>
-                    <span class="en-text">INFOGRAPHIC</span>
-                </a>
-                <a href="tienda.html" class="nav-link">
-                    <span class="es-text">TIENDA</span>
-                    <span class="en-text">STORE</span>
-                </a>
+        <section>
+            <h2>TRABAJOS REALIZADOS</h2>
+            <div class="portfolio-preview">
+                <div class="work-item"><img src="image1.jpeg" alt="Tatuaje 1"></div>
+                <div class="work-item"><img src="image2.jpeg" alt="Tatuaje 2"></div>
+                <div class="work-item"><img src="image3.jpeg" alt="Tatuaje 3"></div>
+                <div class="work-item"><img src="image4.jpeg" alt="Tatuaje 4"></div>
+                <div class="work-item"><img src="image5.jpeg" alt="Tatuaje 5"></div>
+                <div class="work-item"><img src="image6.jpeg" alt="Tatuaje 6"></div>
+                <div class="work-item"><img src="image7.jpeg" alt="Tatuaje 7"></div>
+                <div class="work-item"><img src="image8.jpeg" alt="Tatuaje 8"></div>
+                <div class="work-item"><img src="image9.jpeg" alt="Tatuaje 9"></div>
             </div>
-        </div>
-        
-        <div class="nav-right" style="display: flex; align-items: center;">
-            <div id="i18n-container"></div>
+        </section>
+
+        <section class="booking-section">
+            <h2 style="border:none; text-align:center; display:block;">DISPONIBILIDAD</h2>
+            <p style="text-align:center; opacity:0.8; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 30px;">
+                REVISA LOS DÍAS OCUPADOS Y RESERVA TU CITA VÍA WHATSAPP
+            </p>
             
-            <div class="menu-toggle" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            <div id="tattoo-calendar" style="width: 100%; max-width: 850px; margin: 0 auto;"></div>
+        </section>
+
+        <section style="text-align: center;">
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1GExeMFNzJ/" class="social-link" target="_blank">FACEBOOK</a>
+                <a href="https://www.instagram.com/steve.quesadaa?igsh=MXdlZ3dvMTBtOGZhNg==" class="social-link" target="_blank">INSTAGRAM</a>
             </div>
-        </div>
+        </section>
     </div>
-</nav>
 
-<header>
-    <div class="kanji-bg">和彫</div> <h1>Steve Quesada</h1>
-    <p>Especialista en tatuajes orientales</p>
-</header>
+    <a href="https://wa.me/50683438629?text=Hola%20Steve!%20Vi%20tu%20web%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-<div class="container">
-    <section>
-        <h2>TRABAJOS REALIZADOS</h2>
-        <div class="portfolio-preview">
-            <div class="work-item"><img src="image1.jpeg" alt="Tatuaje 1"></div>
-            <div class="work-item"><img src="image2.jpeg" alt="Tatuaje 2"></div>
-            <div class="work-item"><img src="image3.jpeg" alt="Tatuaje 3"></div>
-            <div class="work-item"><img src="image4.jpeg" alt="Tatuaje 4"></div>
-            <div class="work-item"><img src="image5.jpeg" alt="Tatuaje 5"></div>
-            <div class="work-item"><img src="image6.jpeg" alt="Tatuaje 6"></div>
-            <div class="work-item"><img src="image7.jpeg" alt="Tatuaje 7"></div>
-            <div class="work-item"><img src="image8.jpeg" alt="Tatuaje 8"></div>
-            <div class="work-item"><img src="image9.jpeg" alt="Tatuaje 9"></div>
-        </div>
-    </section>
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuContainer = document.getElementById('mobile-menu-container');
+        const menuIcon = menuBtn.querySelector('i');
 
-    <section class="booking-section">
-        <h2 style="border:none; text-align:center; display:block;">DISPONIBILIDAD</h2>
-        <p style="text-align:center; opacity:0.8; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px;">
-            Selecciona una fecha disponible y reserva tu cita
-        </p>
-
-        <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <input type="text" id="tattoo-calendar" style="display: none;">
-        </div>
-        <p id="calendar-status" style="text-align: center; color: var(--gold); margin-top: 15px; font-size: 0.9rem;">
-            Cargando disponibilidad...
-        </p>
-    </section>
-
-    <section style="text-align: center;">
-        <div class="social-links">
-            <a href="https://www.facebook.com/share/1GExeMFNzJ/" class="social-link" target="_blank">FACEBOOK</a>
-            <a href="https://www.instagram.com/steve.quesadaa?igsh=MXdlZ3dvMTBtOGZhNg==" class="social-link" target="_blank">INSTAGRAM</a>
-        </div>
-    </section>
-</div>
-
-<a href="https://wa.me/50683438629?text=Hola%20Steve!%20Vi%20tu%20web%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<script>
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const menuContainer = document.getElementById('mobile-menu-container');
-    const menuIcon = menuBtn.querySelector('i');
-
-    menuBtn.addEventListener('click', () => {
-        menuContainer.classList.toggle('active');
-        
-        if (menuContainer.classList.contains('active')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-        } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-        }
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", async function() {
-        const statusText = document.getElementById('calendar-status');
-        
-        const fp = flatpickr("#tattoo-calendar", {
-            inline: true,       
-            locale: "es",       
-            minDate: "today",   
-        });
-
-        try {
-            const response = await fetch('/api/booked-dates'); 
-            if(response.ok) {
-                const data = await response.json();
-                if (data.bookedDates && data.bookedDates.length > 0) {
-                    fp.set('disable', data.bookedDates); 
-                }
+        menuBtn.addEventListener('click', () => {
+            menuContainer.classList.toggle('active');
+            if (menuContainer.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
             }
-            statusText.style.display = 'none';
-        } catch (error) {
-            console.error("Error cargando reservas:", error);
-            statusText.innerText = "No se pudo cargar la disponibilidad actual.";
-        }
-    });
-</script>
+        });
+    </script>
 
-<script src="calendar.js"></script>
-<script src="i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('tattoo-calendar');
+            
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                height: 'auto',
+                fixedWeekCount: false, // Hace que el calendario use solo las filas necesarias del mes
+                
+                // Carga nativa desde tu Google Calendar
+                googleCalendarApiKey: 'AIzaSyC1Njkjxw9ndNafp6fML2NZFabkhAJHLZU',
+                events: 'asantanamata21@gmail.com',
+                
+                headerToolbar: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                
+                // Modo Solo Lectura estricto
+                eventClick: function(info) {
+                    // Evita que al hacer clic en el bloque "Ocupado" redirija al Google Calendar externo
+                    info.jsEvent.preventDefault(); 
+                }
+            });
+            
+            calendar.render();
+        });
+    </script>
+
+    <script src="calendar.js"></script>
+    <script src="i18n.js"></script>
 </body>
 </html>
