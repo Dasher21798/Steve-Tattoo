@@ -6,6 +6,10 @@
     <title>Steve Quesada Tattoo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+
     <style>
         :root {
             --accent: #bc1a1a; 
@@ -340,20 +344,6 @@
             50% { left: 100%; }
         }
 
-        iframe {
-            width: 100%;
-            height: 650px;
-            border: none;
-            filter: invert(93%) hue-rotate(180deg) contrast(90%);
-            margin-top: 30px;
-            border-radius: 4px;
-            transition: filter 0.3s ease;
-        }
-
-        iframe:hover {
-            filter: invert(93%) hue-rotate(180deg) contrast(95%) brightness(1.05);
-        }
-
         .social-links {
             display: flex;
             justify-content: center;
@@ -462,7 +452,6 @@
 
             h1 { letter-spacing: 6px; }
             .booking-section { padding: 15px; }
-            iframe { height: 450px; }
 
             .whatsapp-btn {
                 bottom: 20px;
@@ -533,16 +522,15 @@
     <section class="booking-section">
         <h2 style="border:none; text-align:center; display:block;">RESERVA TU ESPACIO</h2>
         <p style="text-align:center; opacity:0.8; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px;">
-            Selecciona una fecha disponible y reserva tu cita
+            Consulta la disponibilidad a continuación
         </p>
 
-        <iframe src="https://calendar.google.com/calendar/embed?src=asantanamata21%40gmail.com&ctz=America%2FMexico_City"
-                style="border: 0"
-                width="100%"
-                height="650px"
-                frameborder="0"
-                scrolling="no">
-        </iframe>
+        <div style="display: flex; justify-content: center; margin-top: 30px;">
+            <input type="text" id="tattoo-calendar" style="display: none;">
+        </div>
+        <p id="calendar-status" style="text-align: center; color: var(--gold); margin-top: 15px; font-size: 0.9rem;">
+            Cargando disponibilidad...
+        </p>
     </section>
 
     <section style="text-align: center;">
@@ -571,6 +559,37 @@
         } else {
             menuIcon.classList.remove('fa-times');
             menuIcon.classList.add('fa-bars');
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const statusText = document.getElementById('calendar-status');
+        
+        // 1. Dibuja el calendario en la pantalla
+        const fp = flatpickr("#tattoo-calendar", {
+            inline: true,       // Lo mantiene siempre abierto y visible
+            locale: "es",       // En español
+            minDate: "today",   // Bloquea los días que ya pasaron
+        });
+
+        // 2. Busca las fechas ocupadas en tu API y las bloquea
+        try {
+            const response = await fetch('/api/booked-dates'); 
+            if(response.ok) {
+                const data = await response.json();
+                if (data.bookedDates && data.bookedDates.length > 0) {
+                    fp.set('disable', data.bookedDates); // Tacha los días ocupados
+                }
+            }
+            // Oculta el mensaje de "Cargando..." si todo salió bien
+            statusText.style.display = 'none';
+        } catch (error) {
+            console.error("Error cargando reservas:", error);
+            statusText.innerText = "No se pudo cargar la disponibilidad actual.";
         }
     });
 </script>
