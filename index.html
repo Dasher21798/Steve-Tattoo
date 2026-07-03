@@ -70,7 +70,7 @@
             color: var(--gold);
             text-decoration: none;
             letter-spacing: 2px;
-            z-index: 1001; /* Queda sobre el menú móvil */
+            z-index: 1001; 
         }
 
         .nav-center {
@@ -113,7 +113,6 @@
             width: 100%;
         }
 
-        /* Clases de idioma */
         html[lang="es"] .en-text { display: none !important; }
         html[lang="en"] .es-text { display: none !important; }
 
@@ -411,7 +410,6 @@
             50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
         }
 
-        /* --- BOTÓN HAMBURGUESA --- */
         .menu-toggle {
             display: none;
             color: var(--gold);
@@ -420,7 +418,6 @@
             z-index: 1001;
         }
 
-        /* --- ADAPTACIÓN PARA MÓVILES --- */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -459,6 +456,141 @@
                 width: 55px;
                 height: 55px;
                 font-size: 25px;
+            }
+        }
+
+        /* ==========================================================================
+           --- CALENDARIO ESTILO GRILLA COMPLETA Y GRANDE (FORZADO MEDIANTE CSS) ---
+           ========================================================================== */
+        
+        /* 1. Contenedor principal del calendario inline: se estira al ancho máximo disponible */
+        .flatpickr-calendar.inline {
+            width: 100% !important;
+            max-width: 850px !important;
+            margin: 0 auto !important;
+            background: rgba(12, 12, 12, 0.5) !important;
+            border: 1px solid rgba(212, 175, 55, 0.2) !important;
+            border-radius: 12px !important;
+            padding: 30px !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        /* Forzar los contenedores internos nativos a usar el 100% del espacio */
+        .flatpickr-innerContainer, 
+        .flatpickr-rContainer, 
+        .flatpickr-days, 
+        .dayContainer {
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        /* 2. Cabecera superior: Mes y Año */
+        .flatpickr-months {
+            height: 70px !important;
+        }
+        .flatpickr-current-month {
+            font-size: 1.6rem !important;
+            color: #ffffff !important;
+            padding: 10px 0 0 0 !important;
+        }
+        .flatpickr-monthDropdown-months {
+            font-family: 'Syncopate', sans-serif !important;
+            font-weight: bold !important;
+            text-transform: uppercase;
+        }
+        .flatpickr-prev-month, .flatpickr-next-month {
+            padding: 15px !important;
+            color: var(--gold) !important;
+        }
+        .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg {
+            fill: var(--accent) !important;
+        }
+
+        /* 3. Cabeceras de los días de la semana (Lun, Mar, Mié...) */
+        .flatpickr-weekdays {
+            height: 50px !important;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            margin-bottom: 10px;
+        }
+        span.flatpickr-weekday {
+            font-family: 'Syncopate', sans-serif !important;
+            font-size: 0.9rem !important;
+            font-weight: bold !important;
+            color: var(--gold) !important;
+            letter-spacing: 1px;
+        }
+
+        /* 4. Casillas de los números individuales (La cuadrícula) */
+        .flatpickr-day {
+            width: 14.28% !important; /* Divide equitativamente los 7 días de la semana */
+            max-width: 14.28% !important;
+            height: 85px !important; /* Altura generosa estilo calendario de escritorio */
+            line-height: 85px !important; /* Centrado vertical del número */
+            font-size: 1.3rem !important; 
+            border-radius: 6px !important;
+            margin: 5px 0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            color: #ffffff !important;
+            background: rgba(20, 20, 20, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        }
+
+        /* Días deshabilitados, pasados u ocupados */
+        .flatpickr-day.flatpickr-disabled, 
+        .flatpickr-day.flatpickr-disabled:hover,
+        .flatpickr-day.prevMonthDay, 
+        .flatpickr-day.nextMonthDay {
+            color: rgba(255, 255, 255, 0.12) !important;
+            background: rgba(5, 5, 5, 0.2) !important;
+            border-color: transparent !important;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+
+        /* Resaltado del día actual (Hoy) */
+        .flatpickr-day.today {
+            border-color: var(--accent) !important;
+            color: var(--accent) !important;
+            font-weight: bold;
+        }
+
+        /* Día seleccionado por el cliente */
+        .flatpickr-day.selected {
+            background: var(--gradient) !important;
+            border-color: var(--gold) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(188, 26, 26, 0.5) !important;
+            font-weight: bold;
+        }
+
+        /* Efecto visual elegante al posarse sobre un día libre disponible */
+        .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):hover {
+            background: rgba(212, 175, 55, 0.15) !important;
+            border-color: var(--gold) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reducción proporcional inteligente en teléfonos móviles para evitar desbordes */
+        @media (max-width: 768px) {
+            .flatpickr-calendar.inline {
+                padding: 10px !important;
+            }
+            .flatpickr-day {
+                height: 48px !important;
+                line-height: 48px !important;
+                font-size: 1.1rem !important;
+                margin: 2px 0 !important;
+            }
+            .flatpickr-current-month {
+                font-size: 1.2rem !important;
+            }
+            span.flatpickr-weekday {
+                font-size: 0.75rem !important;
+            }
+            .flatpickr-months {
+                height: 50px !important;
             }
         }
     </style>
@@ -522,7 +654,7 @@
     <section class="booking-section">
         <h2 style="border:none; text-align:center; display:block;">DISPONIBILIDAD</h2>
         <p style="text-align:center; opacity:0.8; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 20px;">
-            
+            Selecciona una fecha disponible y reserva tu cita
         </p>
 
         <div style="display: flex; justify-content: center; margin-top: 30px;">
@@ -569,23 +701,20 @@
     document.addEventListener("DOMContentLoaded", async function() {
         const statusText = document.getElementById('calendar-status');
         
-        // 1. Dibuja el calendario en la pantalla
         const fp = flatpickr("#tattoo-calendar", {
-            inline: true,       // Lo mantiene siempre abierto y visible
-            locale: "es",       // En español
-            minDate: "today",   // Bloquea los días que ya pasaron
+            inline: true,       
+            locale: "es",       
+            minDate: "today",   
         });
 
-        // 2. Busca las fechas ocupadas en tu API y las bloquea
         try {
             const response = await fetch('/api/booked-dates'); 
             if(response.ok) {
                 const data = await response.json();
                 if (data.bookedDates && data.bookedDates.length > 0) {
-                    fp.set('disable', data.bookedDates); // Tacha los días ocupados
+                    fp.set('disable', data.bookedDates); 
                 }
             }
-            // Oculta el mensaje de "Cargando..." si todo salió bien
             statusText.style.display = 'none';
         } catch (error) {
             console.error("Error cargando reservas:", error);
