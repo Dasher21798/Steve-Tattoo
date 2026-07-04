@@ -7,381 +7,110 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent: #bc1a1a;
-            --gold: #d4af37;
-            --bg: #080808;
-            --text: #ffffff;
-            --glass: rgba(15, 15, 15, 0.85);
-            --gradient: linear-gradient(135deg, #bc1a1a, #d4af37);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Serif JP', serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            overflow-x: hidden;
-            animation: bgShift 20s ease-in-out infinite alternate;
-
-            background-image:
-                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
-                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
-                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png');
-            background-attachment: fixed;
-        }
-
-        @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(8, 8, 8, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.2rem;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 2px;
-            z-index: 1001; /* Queda sobre el menú móvil */
-        }
-
-        .nav-center {
-            display: flex;
-            justify-content: center;
-            flex: 1;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            color: var(--text);
-            text-decoration: none;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
+        :root {--accent: #bc1a1a; --gold: #d4af37; --bg: #080808; --text: #ffffff; --glass: rgba(15, 15, 15, 0.85); --gradient: linear-gradient(135deg, #bc1a1a, #d4af37); }
+        * {box-sizing: border-box; }
+        body {font-family: 'Noto Serif JP', serif; background-color: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; animation: bgShift 20s ease-in-out infinite alternate; background-image: linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)), url('https://www.transparenttextures.com/patterns/shattered-island.png'), url('https://www.transparenttextures.com/patterns/japanese-sayagata.png'); background-attachment: fixed; }
+        @keyframes bgShift {0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        nav {position: fixed; top: 0; width: 100%; background: rgba(8, 8, 8, 0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        nav .container {display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
+        .nav-logo {font-family: 'Syncopate', sans-serif; font-size: 1.2rem; color: var(--gold); text-decoration: none; letter-spacing: 2px; z-index: 1001; }
+        .nav-center {display: flex; justify-content: center; flex: 1; }
+        .nav-links {display: flex; gap: 30px; }
+        .nav-link {color: var(--text); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s ease; position: relative; }
+        .nav-link:hover, .nav-link.active {color: var(--gold); }
+        .nav-link::after {content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--gradient); transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after {width: 100%; }
+        
         /* Clases de idioma */
         html[lang="es"] .en-text { display: none !important; }
         html[lang="en"] .es-text { display: none !important; }
 
-        .hero {
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            margin-top: 70px;
-            background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%);
-        }
-
-        .hero h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(2rem, 6vw, 4rem);
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            margin: 0;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .steve-story {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(188, 26, 26, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
-        }
-
-        .story-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-            text-align: left;
-        }
-
-        .story-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .story-image img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .story-image img:hover {
-            transform: scale(1.05);
-        }
-
-        .story-text {
-            flex: 1;
-        }
-
-        .story-text h2 {
-            font-family: 'Syncopate', sans-serif;
-            color: var(--gold);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .story-text p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 60px 20px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: var(--gradient);
-            color: white;
-            width: 65px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            text-decoration: none;
-            z-index: 1000;
-            box-shadow: 4px 4px 0px var(--gold);
-            transition: all 0.3s ease;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translate(-4px, -4px) scale(1.1);
-            box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5);
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); }
-            50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
-        }
-
-        /* --- BOTÓN HAMBURGUESA --- */
-        .menu-toggle {
-            display: none;
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        /* --- ADAPTACIÓN PARA MÓVILES --- */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-                margin-left: 15px;
-            }
-
-            .nav-center {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(8, 8, 8, 0.98);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: clip-path 0.4s ease-in-out;
-            }
-
-            .nav-center.active {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            }
-
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                padding: 30px 0;
-                gap: 20px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-                letter-spacing: 4px;
-            }
-            .story-content {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .story-text h2 {
-                font-size: 1.5rem;
-            }
-            .story-image {
-                justify-content: center;
-            }
-
-            .whatsapp-btn {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 25px;
-            }
-        }
+        .lang-btn {background:none; border:none; color:var(--gold); cursor:pointer; font-family:'Syncopate'; font-size:0.7rem; padding: 5px; }
+        
+        .hero {height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; margin-top: 70px; background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%); }
+        .hero h1 {font-family: 'Syncopate', sans-serif; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: 8px; text-transform: uppercase; margin: 0; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .steve-story {padding: 80px 0; background: linear-gradient(135deg, rgba(188, 26, 26, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%); }
+        .story-content {display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; text-align: left; }
+        .story-image img {width: 100%; max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .story-text h2 {font-family: 'Syncopate', sans-serif; color: var(--gold); font-size: 2rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .story-text p {margin-bottom: 15px; line-height: 1.6; opacity: 0.9; }
+        .container {max-width: 1200px; margin: auto; padding: 60px 20px; opacity: 0; transform: translateY(50px); animation: fadeInUp 1s ease-out 0.5s forwards; }
+        @keyframes fadeInUp {to { opacity: 1; transform: translateY(0); } }
+        .whatsapp-btn {position: fixed; bottom: 40px; right: 40px; background: var(--gradient); color: white; width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; border-radius: 50%; box-shadow: 4px 4px 0px var(--gold); }
+        
+        @media (max-width: 768px) { .menu-toggle {display: block; } .story-content {grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<nav>
-    <div class="container">
-        <div class="nav-left">
-            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
-        </div>
-        
-        <div class="nav-center" id="mobile-menu-container">
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">
-                    <span class="es-text">INICIO</span>
-                    <span class="en-text">HOME</span>
-                </a>
-                <a href="infografia.html" class="nav-link active">
-                    <span class="es-text">INFOGRAFÍA</span>
-                    <span class="en-text">INFOGRAPHIC</span>
-                </a>
-                <a href="tienda.html" class="nav-link">
-                    <span class="es-text">TIENDA</span>
-                    <span class="en-text">STORE</span>
-                </a>
+    <nav>
+        <div class="container">
+            <div class="nav-left"><a href="index.html" class="nav-logo">STEVE QUESADA</a></div>
+            <div class="nav-center">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link"><span class="es-text">INICIO</span><span class="en-text">HOME</span></a>
+                    <a href="infografia.html" class="nav-link active"><span class="es-text">INFOGRAFÍA</span><span class="en-text">INFOGRAPHIC</span></a>
+                    <a href="tienda.html" class="nav-link"><span class="es-text">TIENDA</span><span class="en-text">STORE</span></a>
+                </div>
+            </div>
+            <div class="nav-right" style="display: flex; align-items: center;">
+                <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+                <span style="color:var(--gold)">|</span>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
             </div>
         </div>
-        
-        <div class="nav-right" style="display: flex; align-items: center;">
-            <div id="i18n-container"></div>
-            
-            <div class="menu-toggle" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+    </nav>
+
+    <section class="hero">
+        <h1><span class="es-text">INFOGRAFÍA</span><span class="en-text">INFOGRAPHIC</span></h1>
+    </section>
+
+    <section class="steve-story">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="info.jpg" alt="Steve Quesada">
+                </div>
+                <div class="story-text">
+                    <h2><span class="es-text">Sobre mí</span><span class="en-text">About Me</span></h2>
+                    <p>
+                        <span class="es-text">Hola, mi nombre es Steve Quesada. Soy tatuador profesional y cuento con más de seis años de experiencia en el mundo del tatuaje.</span>
+                        <span class="en-text">Hello, my name is Steve Quesada. I am a professional tattoo artist with over six years of experience in the tattoo industry.</span>
+                    </p>
+                    <p>
+                        <span class="es-text">Desde pequeño siempre me interesaron el dibujo y las artes visuales. Ese interés me llevó a estudiar Docencia Artística y, con el tiempo, descubrí el tatuaje. Recuerdo que pude comprar mi primer kit gracias a un préstamo que me hizo un primo. Lo que comenzó como una simple curiosidad por este oficio terminó convirtiéndose en mi profesión y en mi mayor pasión.</span>
+                        <span class="en-text">Since I was a child, I have always been interested in drawing and visual arts. That interest led me to study Art Education, and eventually, I discovered tattooing. I remember buying my first kit thanks to a loan from my cousin. What started as simple curiosity for this trade ended up becoming my profession and my greatest passion.</span>
+                    </p>
+                    <p>
+                        <span class="es-text">Empecé tatuando desde mi casa, pero siempre tuve la meta de trabajar en un estudio profesional. Eso me llevó a formar parte de distintos estudios y, actualmente, trabajo en GoodFellas Tattoo, en Heredia, Costa Rica.</span>
+                        <span class="en-text">I started tattooing from home, but I always had the goal of working in a professional studio. That led me to join different studios, and currently, I work at GoodFellas Tattoo, in Heredia, Costa Rica.</span>
+                    </p>
+                    <p>
+                        <span class="es-text">Además, he tenido la oportunidad de viajar a convenciones y conocer a artistas muy influyentes de la industria. Cada una de esas experiencias ha enriquecido mi aprendizaje y me permite ofrecer un trabajo de mayor calidad a cada uno de mis clientes.</span>
+                        <span class="en-text">Additionally, I have had the opportunity to travel to conventions and meet highly influential artists in the industry. Each of those experiences has enriched my learning and allows me to offer higher quality work to each of my clients.</span>
+                    </p>
+                    <p>
+                        <span class="es-text">Hoy me especializo principalmente en tatuajes de estilo japonés y motivos inspirados en esta tradición, aunque también realizo otros estilos. La estética japonesa es la que más me apasiona y en la que concentro la mayor parte de mi trabajo.</span>
+                        <span class="en-text">Today, I specialize mainly in Japanese-style tattoos and motifs inspired by this tradition, although I also perform other styles. The Japanese aesthetic is what I am most passionate about and where I concentrate most of my work.</span>
+                    </p>
+                    <p>
+                        <span class="es-text">Si te gustaría tatuarte conmigo o tienes una idea que quieres desarrollar, será un gusto asesorarte y brindarte toda la información necesaria para agendar tu cita.</span>
+                        <span class="en-text">If you would like to get a tattoo with me or have an idea you want to develop, it will be a pleasure to advise you and provide you with all the necessary information to schedule your appointment.</span>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </section>
 
-<section class="hero">
-    <h1>
-        <span class="es-text">INFOGRAFÍA</span>
-        <span class="en-text">INFOGRAPHIC</span>
-    </h1>
-</section>
+    <a href="https://wa.me/50683438629" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-<section class="steve-story">
-    <div class="container">
-        <div class="story-content">
-            <div class="story-image">
-                <img src="info.jpg" alt="Steve Quesada - Imagen principal infografía" onerror="this.src='https://via.placeholder.com/400x500/333/666?text=Image+10'">
-            </div>
-            <div class="story-text">
-    <h2>Sobre mí</h2>
-    <p>Hola, mi nombre es Steve Quesada. Soy tatuador profesional y cuento con más de seis años de experiencia en el mundo del tatuaje.</p>
-    <p>Desde pequeño siempre me interesaron el dibujo y las artes visuales. Ese interés me llevó a estudiar Docencia Artística y, con el tiempo, descubrí el tatuaje. Recuerdo que pude comprar mi primer kit gracias a un préstamo que me hizo un primo. Lo que comenzó como una simple curiosidad por este oficio terminó convirtiéndose en mi profesión y en mi mayor pasión.</p>
-    <p>Empecé tatuando desde mi casa, pero siempre tuve la meta de trabajar en un estudio profesional. Eso me llevó a formar parte de distintos estudios y, actualmente, trabajo en GoodFellas Tattoo, en Heredia, Costa Rica.</p>
-    <p>Además, he tenido la oportunidad de viajar a convenciones y conocer a artistas muy influyentes de la industria. Cada una de esas experiencias ha enriquecido mi aprendizaje y me permite ofrecer un trabajo de mayor calidad a cada uno de mis clientes.</p>
-    <p>Hoy me especializo principalmente en tatuajes de estilo japonés y motivos inspirados en esta tradición, aunque también realizo otros estilos. La estética japonesa es la que más me apasiona y en la que concentro la mayor parte de mi trabajo.</p>
-    <p>Si te gustaría tatuarte conmigo o tienes una idea que quieres desarrollar, será un gusto asesorarte y brindarte toda la información necesaria para agendar tu cita.</p>
-</div>
-        </div>
-    </div>
-</section>
-
-<a href="https://wa.me/50683438629?text=Hola%20Steve!%20Vi%20tu%20infografía%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<script>
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const menuContainer = document.getElementById('mobile-menu-container');
-    const menuIcon = menuBtn.querySelector('i');
-
-    menuBtn.addEventListener('click', () => {
-        menuContainer.classList.toggle('active');
-        
-        if (menuContainer.classList.contains('active')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-        } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
+    <script>
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('preferredLanguage', lang);
         }
-    });
-</script>
-
-<script src="i18n.js"></script>
-
+        // Cargar preferencia al iniciar
+        const savedLang = localStorage.getItem('preferredLanguage') || 'es';
+        setLanguage(savedLang);
+    </script>
 </body>
 </html>
