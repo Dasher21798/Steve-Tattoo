@@ -186,58 +186,69 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script>
-        // Lógica de Menú Móvil
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menuContainer = document.getElementById('mobile-menu-container');
-        const menuIcon = menuBtn.querySelector('i');
-        
-        menuBtn.addEventListener('click', () => {
-            menuContainer.classList.toggle('active');
-            if (menuContainer.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-
-        // Lógica de Idiomas
-        function setLanguage(lang) {
-            document.documentElement.lang = lang;
-            localStorage.setItem('preferredLanguage', lang);
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLanguage') || 'es';
-            setLanguage(savedLang);
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.10/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js"></script>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('tattoo-calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'es',
-                height: 'auto',
-                fixedWeekCount: false,
-                googleCalendarApiKey: 'AIzaSyC1Njkjxw9ndNafp6fML2NZFabkhAJHLZU',
-                events: 'citassteve@gmail.com',
-                headerToolbar: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                eventClick: function(info) {
-                    info.jsEvent.preventDefault();
+        // VARIABLE GLOBAL DEL CALENDARIO
+        let tattooCalendar;
+
+        // Lógica de Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuContainer = document.getElementById('mobile-menu-container');
+        if (menuBtn && menuContainer) {
+            const menuIcon = menuBtn.querySelector('i');
+            menuBtn.addEventListener('click', () => {
+                menuContainer.classList.toggle('active');
+                if (menuContainer.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
                 }
             });
-            calendar.render();
+        }
+
+        // Lógica de Idiomas con LocalStorage
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Si el calendario ya cargó, le cambiamos el idioma dinámicamente
+            if (tattooCalendar) {
+                tattooCalendar.setOption('locale', lang);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'es';
+            const calendarEl = document.getElementById('tattoo-calendar');
+            
+            // INICIALIZAR EL CALENDARIO
+            if (calendarEl) {
+                tattooCalendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: savedLang, // Lee el idioma guardado al cargar
+                    height: 'auto',
+                    fixedWeekCount: false,
+                    googleCalendarApiKey: 'AIzaSyC1Njkjxw9ndNafp6fML2NZFabkhAJHLZU',
+                    events: 'citassteve@gmail.com',
+                    headerToolbar: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
+                    eventClick: function(info) {
+                        info.jsEvent.preventDefault();
+                    }
+                });
+                tattooCalendar.render();
+            }
+
+            // Aplicar los cambios al resto de la página web
+            setLanguage(savedLang);
         });
     </script>
     <script src="calendar.js"></script>
