@@ -188,7 +188,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.10/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js"></script>
 
     <script>
         // VARIABLE GLOBAL DEL CALENDARIO
@@ -216,7 +216,7 @@
             document.documentElement.lang = lang;
             localStorage.setItem('preferredLanguage', lang);
             
-            // Si el calendario ya cargó, le cambiamos el idioma dinámicamente
+            // Cambiar el idioma dinámicamente si el calendario ya está cargado
             if (tattooCalendar) {
                 tattooCalendar.setOption('locale', lang);
             }
@@ -230,7 +230,7 @@
             if (calendarEl) {
                 tattooCalendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
-                    locale: savedLang, // Lee el idioma guardado al cargar
+                    locale: savedLang, // Lee el idioma guardado al cargar la página
                     height: 'auto',
                     fixedWeekCount: false,
                     googleCalendarApiKey: 'AIzaSyC1Njkjxw9ndNafp6fML2NZFabkhAJHLZU',
@@ -251,6 +251,5 @@
             setLanguage(savedLang);
         });
     </script>
-    <script src="calendar.js"></script>
 </body>
 </html>
