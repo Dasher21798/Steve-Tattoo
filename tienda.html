@@ -7,296 +7,119 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Noto+Serif+JP:wght@900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent: #bc1a1a;
-            --gold: #d4af37;
-            --bg: #080808;
-            --text: #ffffff;
-            --glass: rgba(15, 15, 15, 0.85);
-            --gradient: linear-gradient(135deg, #bc1a1a, #d4af37);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Serif JP', serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            overflow-x: hidden;
-            animation: bgShift 20s ease-in-out infinite alternate;
-            background-image:
-                linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)),
-                url('https://www.transparenttextures.com/patterns/shattered-island.png'),
-                url('https://www.transparenttextures.com/patterns/japanese-sayagata.png');
-            background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(8, 8, 8, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.2rem;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 2px;
-            z-index: 1001; /* Queda sobre el menú móvil */
-        }
-
-        .nav-center {
-            display: flex;
-            justify-content: center;
-            flex: 1;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            color: var(--text);
-            text-decoration: none;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
+        :root {--accent: #bc1a1a; --gold: #d4af37; --bg: #080808; --text: #ffffff; --glass: rgba(15, 15, 15, 0.85); --gradient: linear-gradient(135deg, #bc1a1a, #d4af37); }
+        * {box-sizing: border-box; }
+        body {font-family: 'Noto Serif JP', serif; background-color: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; animation: bgShift 20s ease-in-out infinite alternate; background-image: linear-gradient(to bottom, rgba(8,8,8,0.8), rgba(8,8,8,0.9)), url('https://www.transparenttextures.com/patterns/shattered-island.png'), url('https://www.transparenttextures.com/patterns/japanese-sayagata.png'); background-attachment: fixed; display: flex; flex-direction: column; min-height: 100vh; }
+        @keyframes bgShift {0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        
+        nav {position: fixed; top: 0; width: 100%; background: rgba(8, 8, 8, 0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        nav .container {display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
+        .nav-logo {font-family: 'Syncopate', sans-serif; font-size: 1.2rem; color: var(--gold); text-decoration: none; letter-spacing: 2px; z-index: 1001; }
+        .nav-center {display: flex; justify-content: center; flex: 1; }
+        .nav-links {display: flex; gap: 30px; }
+        .nav-link {color: var(--text); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s ease; position: relative; }
+        .nav-link:hover, .nav-link.active {color: var(--gold); }
+        .nav-link::after {content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--gradient); transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after {width: 100%; }
+        
         /* Clases de idioma */
         html[lang="es"] .en-text { display: none !important; }
         html[lang="en"] .es-text { display: none !important; }
+        .lang-btn {background:none; border:none; color:var(--gold); cursor:pointer; font-family:'Syncopate'; font-size:0.7rem; padding: 5px; transition: color 0.3s;}
+        .lang-btn:hover {color: #fff;}
 
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            margin-top: 70px;
-            background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%);
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 3.5rem);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 15px 0;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: var(--gradient);
-            color: white;
-            width: 65px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            text-decoration: none;
-            z-index: 1000;
-            box-shadow: 4px 4px 0px var(--gold);
-            transition: all 0.3s ease;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translate(-4px, -4px) scale(1.1);
-            box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5);
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); }
-            50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); }
-        }
-
+        .hero {flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; margin-top: 70px; background: radial-gradient(circle, rgba(188, 26, 26, 0.1) 0%, transparent 70%); padding: 20px; }
+        .hero h1 {font-family: 'Syncopate', sans-serif; font-size: clamp(1.5rem, 4vw, 3.5rem); letter-spacing: 4px; text-transform: uppercase; margin: 15px 0; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); opacity: 0; transform: translateY(30px); animation: fadeInUp 1s ease-out forwards; }
+        @keyframes fadeInUp {to {opacity: 1; transform: translateY(0); } }
+        
+        .whatsapp-btn {position: fixed; bottom: 40px; right: 40px; background: var(--gradient); color: white; width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 4px 4px 0px var(--gold); transition: all 0.3s ease; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        .whatsapp-btn:hover {transform: translate(-4px, -4px) scale(1.1); box-shadow: 8px 8px 0px var(--gold), 0 0 20px rgba(188, 26, 26, 0.5); }
+        @keyframes pulse {0%, 100% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 0 rgba(188, 26, 26, 0.4); } 50% { box-shadow: 4px 4px 0px var(--gold), 0 0 0 10px rgba(188, 26, 26, 0); } }
+        
         /* --- BOTÓN HAMBURGUESA --- */
-        .menu-toggle {
-            display: none;
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
+        .menu-toggle {display: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
+        
         /* --- ADAPTACIÓN PARA MÓVILES --- */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-                margin-left: 15px;
-            }
-
-            .nav-center {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(8, 8, 8, 0.98);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: clip-path 0.4s ease-in-out;
-            }
-
-            .nav-center.active {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            }
-
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                padding: 30px 0;
-                gap: 20px;
-            }
-
-            .hero h1 {
-                letter-spacing: 2px;
-            }
-
-            .whatsapp-btn {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 25px;
-            }
+            .menu-toggle {display: block; margin-left: 15px; }
+            .nav-center {position: absolute; top: 100%; left: 0; width: 100%; background: rgba(8, 8, 8, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transition: clip-path 0.4s ease-in-out; }
+            .nav-center.active {clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            .nav-links {flex-direction: column; align-items: center; padding: 30px 0; gap: 20px; }
+            .hero h1 {letter-spacing: 2px; }
+            .whatsapp-btn {bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 25px; }
         }
     </style>
 </head>
 <body>
-
-<nav>
-    <div class="container">
-        <div class="nav-left">
-            <a href="index.html" class="nav-logo">STEVE QUESADA</a>
-        </div>
-        
-        <div class="nav-center" id="mobile-menu-container">
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">
-                    <span class="es-text">INICIO</span>
-                    <span class="en-text">HOME</span>
-                </a>
-                <a href="infografia.html" class="nav-link">
-                    <span class="es-text">INFOGRAFÍA</span>
-                    <span class="en-text">INFOGRAPHIC</span>
-                </a>
-                <a href="tienda.html" class="nav-link active">
-                    <span class="es-text">TIENDA</span>
-                    <span class="en-text">STORE</span>
-                </a>
+    <nav>
+        <div class="container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">STEVE QUESADA</a>
+            </div>
+            <div class="nav-center" id="mobile-menu-container">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">
+                        <span class="es-text">INICIO</span>
+                        <span class="en-text">HOME</span>
+                    </a>
+                    <a href="infografia.html" class="nav-link">
+                        <span class="es-text">INFOGRAFÍA</span>
+                        <span class="en-text">INFOGRAPHIC</span>
+                    </a>
+                    <a href="tienda.html" class="nav-link active">
+                        <span class="es-text">TIENDA</span>
+                        <span class="en-text">STORE</span>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-right" style="display: flex; align-items: center; gap: 5px;">
+                <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+                <span style="color:var(--gold)">|</span>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                <div class="menu-toggle" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
-        
-        <div class="nav-right" style="display: flex; align-items: center;">
-            <div id="i18n-container"></div>
-            
-            <div class="menu-toggle" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </div>
-</nav>
+    </nav>
 
-<section class="hero">
-    <h1 class="es-text">PRONTO VISITA NUESTRA TIENDA</h1>
-    <h1 class="en-text">VISIT OUR STORE SOON</h1>
-</section>
+    <section class="hero">
+        <h1 class="es-text">PRONTO VISITA NUESTRA TIENDA</h1>
+        <h1 class="en-text">VISIT OUR STORE SOON</h1>
+    </section>
 
-<a href="https://wa.me/50683438629?text=Hola%20Steve!%20Quiero%20información%20sobre%20la%20tienda" class="whatsapp-btn" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+    <a href="https://wa.me/50683438629?text=Hola%20Steve!%20Quiero%20información%20sobre%20la%20tienda" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-<script>
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const menuContainer = document.getElementById('mobile-menu-container');
-    const menuIcon = menuBtn.querySelector('i');
-
-    menuBtn.addEventListener('click', () => {
-        menuContainer.classList.toggle('active');
-        
-        if (menuContainer.classList.contains('active')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-        } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
+    <script>
+        // Lógica de Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuContainer = document.getElementById('mobile-menu-container');
+        if(menuBtn && menuContainer) {
+            const menuIcon = menuBtn.querySelector('i');
+            menuBtn.addEventListener('click', () => {
+                menuContainer.classList.toggle('active');
+                if (menuContainer.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
         }
-    });
-</script>
 
-<script src="i18n.js"></script>
-
+        // Lógica de Idiomas con LocalStorage
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'es';
+            setLanguage(savedLang);
+        });
+    </script>
 </body>
 </html>
