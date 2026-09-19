@@ -229,16 +229,6 @@
       opacity: 0;
       animation: fadeInScale 0.8s ease-out forwards;
     }
-    /* Mantenemos las animaciones de los items dinámicos */
-    .work-item:nth-child(1) { animation-delay: 2.5s; }
-    .work-item:nth-child(2) { animation-delay: 2.7s; }
-    .work-item:nth-child(3) { animation-delay: 2.9s; }
-    .work-item:nth-child(4) { animation-delay: 3.1s; }
-    .work-item:nth-child(5) { animation-delay: 3.3s; }
-    .work-item:nth-child(6) { animation-delay: 3.5s; }
-    .work-item:nth-child(7) { animation-delay: 3.7s; }
-    .work-item:nth-child(8) { animation-delay: 3.9s; }
-    .work-item:nth-child(9) { animation-delay: 4.1s; }
     
     @keyframes fadeInScale {
       from { opacity: 0; transform: scale(0.8) translateY(30px); }
@@ -539,7 +529,7 @@
         <span class="es-text">TRABAJOS REALIZADOS</span>
         <span class="en-text">PORTFOLIO</span>
       </h2>
-      <!-- AQUÍ ES DONDE CARGARÁ LA GALERÍA DE CLOUDINARY -->
+      <!-- AQUÍ ES DONDE CARGARÁ LA GALERÍA ROTATIVA DE CLOUDINARY -->
       <div class="portfolio-preview" id="galeria-tatuajes">
       </div>
     </section>
@@ -556,12 +546,12 @@
     <section style="text-align: center;">
       <div class="social-links">
         <a href="https://www.facebook.com/share/1GExeMFNzJ/" class="social-link" target="_blank">FACEBOOK</a>
-        <a href="https://www.instagram.com/steve.quesadaa?igsh=MXdlZ3dvMTBtOGZhNg==" class="social-link" target="_blank">INSTAGRAM</a>
+        <a href="url?id=118" class="social-link" target="_blank">INSTAGRAM</a>
       </div>
     </section>
   </div>
 
-  <a href="https://wa.me/50683438629?text=Hola%20Steve!%20Vi%20tu%20web%20y%20quiero%20cotizar%20un%20tatuaje" class="whatsapp-btn" target="_blank">
+  <a href="url?id=119" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
 
@@ -632,43 +622,75 @@
     });
 
     // ==========================================
-    // Cargar Galería Dinámica desde Cloudinary
+    // Cargar Galería Dinámica y Rotativa
     // ==========================================
-    async function cargarGaleria() {
-      const cloudName = 'fw7wy1fk'; // Tu Cloud Name
-      const tag = 'galeria-steve';  // Tu etiqueta
+    let todasLasImagenes = [];
+    const cloudName = 'fw7wy1fk'; // Tu identificador de Cloudinary
+    const tag = 'galeria-steve';  // Tu etiqueta en Cloudinary
+
+    // Función para desordenar aleatoriamente un array (como barajar cartas)
+    function mezclarArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Función que renderiza 6 imágenes al azar
+    function mostrarSeisImagenes() {
       const contenedor = document.getElementById('galeria-tatuajes');
+      if (!contenedor || todasLasImagenes.length === 0) return;
 
-      if (!contenedor) return;
+      // Limpiamos la galería visualmente antes de poner las nuevas
+      contenedor.innerHTML = '';
 
+      // Mezclamos la lista completa de Cloudinary y tomamos solo las primeras 6
+      const imagenesSeleccionadas = mezclarArray([...todasLasImagenes]).slice(0, 6);
+
+      imagenesSeleccionadas.forEach((imagen, index) => {
+        const divItem = document.createElement('div');
+        divItem.className = 'work-item';
+        
+        // Retrasamos un poco la animación de cada una para que entren en cascada
+        divItem.style.animationDelay = `${0.15 * index}s`;
+
+        const imgElement = document.createElement('img');
+        imgElement.src = `https://res.cloudinary.com/${cloudName}/image/upload/v${imagen.version}/${imagen.public_id}.${imagen.format}`;
+        imgElement.alt = "Steve Tattoo";
+        imgElement.loading = "lazy";
+        
+        divItem.appendChild(imgElement);
+        contenedor.appendChild(divItem);
+      });
+    }
+
+    // Función principal que inicia todo el proceso
+    async function iniciarGaleria() {
       try {
+        // Pedimos la lista de TODAS las imágenes disponibles a Cloudinary
         const url = `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`;
         const respuesta = await fetch(url);
         const data = await respuesta.json();
 
-        // Por cada imagen devuelta por Cloudinary
-        data.resources.forEach(imagen => {
-          // 1. Creamos el contenedor div.work-item para mantener tus estilos
-          const divItem = document.createElement('div');
-          divItem.className = 'work-item';
+        // Guardamos las imágenes en memoria
+        todasLasImagenes = data.resources;
 
-          // 2. Creamos la imagen
-          const imgElement = document.createElement('img');
-          imgElement.src = `https://res.cloudinary.com/${cloudName}/image/upload/v${imagen.version}/${imagen.public_id}.${imagen.format}`;
-          imgElement.alt = "Steve Tattoo";
-          imgElement.loading = "lazy";
-          
-          // 3. Los unimos y los metemos a la galería
-          divItem.appendChild(imgElement);
-          contenedor.appendChild(divItem);
-        });
+        // Mostramos las primeras 6 inmediatamente al entrar
+        mostrarSeisImagenes();
+
+        // Programamos la rotación cada 2 minutos (120,000 milisegundos)
+        setInterval(() => {
+          mostrarSeisImagenes();
+        }, 120000);
+
       } catch (error) {
-        console.error('Error al cargar la galería:', error);
+        console.error('Error al cargar la galería rotativa:', error);
       }
     }
 
-    // Ejecutamos la función
-    cargarGaleria();
+    // Ejecutamos
+    iniciarGaleria();
   </script>
 </body>
 </html>
