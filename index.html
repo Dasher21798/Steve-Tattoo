@@ -481,11 +481,13 @@
       });
     }
 
+    // Cambiar idioma y forzar la recarga de textos en el calendario
     function setLanguage(lang) {
       document.documentElement.lang = lang;
       localStorage.setItem('preferredLanguage', lang);
       if (tattooCalendar) {
         tattooCalendar.setOption('locale', lang);
+        tattooCalendar.refetchEvents(); // Refresca los eventos para aplicar "Reservado" o "Booked"
       }
     }
 
@@ -521,7 +523,7 @@
       setLanguage(savedLang);
     });
 
-    // Galería Dinámica
+    // Galería Dinámica Cloudinary
     let todasLasImagenes = [];
     const cloudName = 'fw7wy1fk';
     const tag = 'galeria-steve';
